@@ -14,32 +14,91 @@
 Route::get('/', function () {
     return view('welcome');
 });
-//微信授权登录
-Route::get('/login',function (){
-    return view('login');
-});
 
-////////////////////////////////////////////// 标签////////////////////////////////////////////////////
-///
-Route::get('/wechat/tag_list','TagController@tag_list');  //公众号标签列表
-Route::get('/wechat/add_tag','TagController@add_tag');
-Route::post('/wechat/do_add_tag','TagController@do_add_tag');
-Route::get('/wechat/tag_openid_list','TagController@tag_openid_list'); //标签下用户的openid列表
-Route::post('/wechat/tag_openid','TagController@tag_openid'); //为用户打标签
-Route::get('/wechat/user_tag_list','TagController@user_tag_list'); //用户下的标签列表
-Route::get('/wechat/push_tag_message','TagController@push_tag_message'); //推送标签消息
-Route::post('/wechat/do_push_tag_message','TagController@do_push_tag_message'); //执行推送标签消息
-Route::get('/wechat/push_template_message','WechatController@push_template_message'); //
+Route::any('/index','IndexController@index');
+Route::any('/add','IndexController@add');
+Route::any('/delete','IndexController@delete');
+Route::any('/update','IndexController@update');
+Route::any('/update_do','IndexController@update_do');
+Route::any('/del','IndexController@del');
+
+Route::any('/model','ViewController@model');
+Route::any('/register','IndexController@register');
+
+Route::any('/register_do','IndexController@register_do');
+Route::any('/login','IndexController@login');
+Route::any('/login_do','IndexController@login_do');
+
+Route::any('/','ShowController@show');
+Route::any('/show','ShowController@show');
+Route::any('/add_do','ShowController@add_do');
+
+//=====电商======
+//登录
+Route::any('/buthlogin','Buth\ButhIndexController@buthlogin');
+//注册
+Route::any('/buthregist','Buth\ButhIndexController@buthregist');
+Route::any('/buthregist_do','Buth\ButhIndexController@buthregist_do');
+//显示商品页面
+Route::any('/buthindex','Buth\ButhIndexController@buthindex');
+//购物车
+Route::any('/buthcart','Buth\ButhIndexController@buthcart');
+//商品信息
+Route::any('/buthexit','Buth\ButhIndexController@buthexit');
+//产品列表
+Route::any('/buthprolist','Buth\ButhIndexController@buthprolist');
+//订单管理
+Route::any('/buthorders','Buth\ButhIndexController@buthorders');
+//购物车结算
+Route::any('/buthinfo','Buth\ButhIndexController@buthinfo');
+
+//考试
+Route::any('/missadd','MissController@missadd');
+Route::any('/missindex','MissController@missindex');
+Route::any('/missexit','MissController@missexit');
 
 
-////////////////////
+//微信缓存
+Route::any('/indexa','WechatController@indexa');
+//微信用户获取
+Route::any('/wechat_add','WechatController@wechat_add');
+Route::any('/wechat_list','WechatController@wechat_list');
+//网友授权
+Route::any('/wechat_login','WechatController@wechat_login');
+Route::any('/author','WechatController@author');
+Route::any('/getUserInfo','WechatController@getUserInfo');
+//模板接口
+Route::any('/push_template_msg','WechatController@push_template_msg');
+//查看标签
+Route::any('/weixinlist','WechatController@weixinlist');
+//jS-SDK
+Route::any('/get_location','WechatController@get_location');
 
-Route::get('/wechat/clear_api','WechatController@clear_api');
-Route::get('/wechat/source','WechatController@wechat_source'); //素材管理
-Route::get('/wechat/download_source','WechatController@download_source'); //下载资源
-Route::get('/wechat/upload','WechatController@upload'); //上传
-Route::post('/wechat/do_upload','WechatController@do_upload'); //上传
-Route::get('wechat/get_access_token','WechatController@get_access_token'); //获取access_token
-Route::get('/wechat/get_user_list','WechatController@get_user_list'); //获取用户列表
-Route::get('/wechat/login','LoginController@wechat_login'); //微信授权登陆
-Route::get('/wechat/code','LoginController@code'); //接收code
+
+//get请求
+Route::any('/get','WechatController@get');
+//post请求
+Route::any('/post','WechatController@post');
+Route::any('/aadd','WechatController@aadd');
+
+
+Route::any('/event','EventController@event');
+
+
+//标签管理
+Route::any('/tag_list','Tagcontroller@tag_list');
+Route::any('/add_tag','TagController@add_tag');
+Route::post('/do_add_tag','TagController@do_add_tag');
+//微信素材文件上传
+Route::any('/uploads','ResourceController@uploads');
+Route::any('/do_uploads','ResourceController@do_uploads');
+Route::any('/source_list','ResourceController@source_list');
+
+//菜单列表
+Route::any('/menu_list','MenuController@menu_list');
+Route::any('/create_menu','MenuController@create_menu');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

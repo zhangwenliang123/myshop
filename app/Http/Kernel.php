@@ -26,6 +26,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    //中间件
     protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
@@ -41,6 +42,9 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+         'backend'=>[
+
+         ],
     ];
 
     /**
@@ -50,6 +54,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    //路由中间件
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
@@ -60,6 +65,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'checkLogin' => \App\Http\Middleware\checkLogin::class,
     ];
 
     /**
@@ -69,6 +75,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    //中间件的优先级
     protected $middlewarePriority = [
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
